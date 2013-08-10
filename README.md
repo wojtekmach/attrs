@@ -39,8 +39,8 @@ and more! See: <https://github.com/wojtekmach/attrs/blob/master/test/attrs_test.
 
 Notice in previous example we added custom `age=` writer to coerce argument to integer.
 
-One of my favourite features of *Virtus* is attribute coercion, and you can use it here too.
-In fact it's using the same library that was extracted out from Virtus: <https://github.com/solnic/coercible>
+One of my favourite features of **Virtus** is attribute coercion, and you can use it here too.
+In fact it's using the same library that was extracted out from **Virtus**: <https://github.com/solnic/coercible>
 
 ```
 class Person < Attrs(name: String, age: Integer)
