@@ -42,14 +42,14 @@ Notice in previous example we added custom `age=` writer to coerce argument to i
 One of my favourite features of **Virtus** is attribute coercion, and you can use it here too.
 In fact it's using the same library that was extracted out from **Virtus**: <https://github.com/solnic/coercible>
 
-```
+```ruby
 class Person < Attrs(name: String, age: Integer)
 end
 ```
 
 or, simply:
 
-```
+```ruby
 Person = Attrs(name: String, age: Integer)
 ```
 
