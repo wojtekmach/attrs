@@ -28,6 +28,10 @@ require 'attrs'
 class Person < Attrs(:name, :age)
   private
 
+  def default_name
+    "Anonymous"
+  end
+
   def age=(new_age)
     super(new_age.to_i)
   end
@@ -41,6 +45,7 @@ with this code we can:
 * get the attributes hash:    `person.attributes      # => {:name => "John Doe", :age => 26}`
 * get the attribute names:    `Person.attribute_names # => [:name, :age]`
 * compare with other objects: `person == {:name => "John Doe", :age => 26} # => true`
+* Explicitly set default values: `Person.new(age: 26).name # => "Anonymous"
 
 and more! See: <https://github.com/wojtekmach/attrs/blob/master/test/attrs_test.rb>
 

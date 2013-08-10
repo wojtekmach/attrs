@@ -22,7 +22,13 @@ module Attrs
 
       def initialize(attributes)
         self.class.attribute_names.each do |name|
-          self.send("#{name}=", attributes.fetch(name))
+          send("#{name}=", attributes.fetch(name) {
+            if respond_to?("default_#{name}", true)
+              send "default_#{name}"
+            else
+              raise KeyError, "key not found: :age. Define :default_#{name} for a default value"
+            end
+          })
         end
       end
 

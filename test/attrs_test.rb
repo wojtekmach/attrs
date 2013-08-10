@@ -4,6 +4,10 @@ require 'attrs'
 class Person < Attrs(:name, :age)
   private
 
+  def default_name
+    "Anonymous"
+  end
+
   def age=(new_age)
     super(new_age.to_i)
   end
@@ -28,8 +32,12 @@ class PersonTest < Minitest::Spec
 
   it "must be instantiated with all attributes" do
     proc {
-      klass.new(age: 26)
+      klass.new(name: 'John')
     }.must_raise KeyError
+  end
+
+  it "can have default values" do
+    klass.new(age: 26).name.must_equal "Anonymous"
   end
 
   it "can access individual attributes" do
@@ -66,6 +74,9 @@ end
 require 'attrs/coercible'
 
 class Person2 < Attrs(name: String, age: Integer)
+  def default_name
+    "Anonymous"
+  end
 end
 
 class Person2Test < PersonTest
