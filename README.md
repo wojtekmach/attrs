@@ -1,5 +1,7 @@
 # Attrs
 
+[![Build Status](https://secure.travis-ci.org/wojtekmach/attrs.png?branch=master)](http://travis-ci.org/wojtekmach/attrs)
+
 Yet another attributes on steroids gem.
 
 Heavily inspired by [Virtus](https://github.com/solnic/virtus) and
