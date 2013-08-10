@@ -7,9 +7,9 @@ Heavily inspired by [Virtus](https://github.com/solnic/virtus) which totally roc
 ## Features
 
 * immutability
-* all attributes must be specified on initialisation
-* uses basically `attr_reader` and `attr_writer`. Can be easily overwritten
-* just 50 LOC.
+* all attributes must be specified on initialisation. Hopefully less `nil`s flying around
+* uses `attr_reader` and `attr_writer`. Can be easily overwritten
+* just 50 LOC (not including coercion support)
 
 ## Usage
 
@@ -20,7 +20,7 @@ class Person < Attrs(:name, :age)
   private
 
   def age=(new_age)
-    super(new_age.to_f)
+    super(new_age.to_i)
   end
 end
 
@@ -34,6 +34,26 @@ with this code we can:
 * compare with other objects: `person == {:name => "John Doe", :age => 26} # => true`
 
 and more! See: <https://github.com/wojtekmach/attrs/blob/master/test/attrs_test.rb>
+
+### Coercion
+
+Notice in previous example we added custom `age=` writer to coerce argument to integer.
+
+One of my favourite features of *Virtus* is attribute coercion, and you can use it here too.
+In fact it's using the same library that was extracted out from Virtus: <https://github.com/solnic/coercible>
+
+```
+class Person < Attrs(name: String, age: Integer)
+end
+```
+
+or, simply:
+
+```
+Person = Attrs(name: String, age: Integer)
+```
+
+(note, using 2nd style you won't be able to use `super` when overwriting methods)
 
 ## Installation
 

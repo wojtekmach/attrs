@@ -1,49 +1,50 @@
 require 'attrs/version'
 
-def Attrs(*args)
-  Attrs.new(*args)
+def Attrs(*args, &block)
+  Attrs.new(*args, &block)
 end
 
 module Attrs
-  def self.new(*attribute_names)
+  def self.new(*attribute_names, &block)
     Class.new do
       const_set(:ATTRIBUTE_NAMES, attribute_names)
 
-      extend Attrs::ClassMethods
-      include Attrs::InstanceMethods
+      def self.attribute_names
+        self::ATTRIBUTE_NAMES
+      end
+
+      def self.attr(name)
+        attr_accessor name
+        private :"#{name}="
+      end
 
       attribute_names.each { |name| attr name }
-    end
-  end
 
-  module ClassMethods
-    def attribute_names
-      self::ATTRIBUTE_NAMES
-    end
-
-    def attr(name)
-      attr_accessor name
-      private :"#{name}="
-    end
-  end
-
-  module InstanceMethods
-    def initialize(attributes)
-      self.class.attribute_names.each do |name|
-        self.send("#{name}=", attributes.fetch(name))
+      def initialize(attributes)
+        self.class.attribute_names.each do |name|
+          self.send("#{name}=", attributes.fetch(name))
+        end
       end
-    end
 
-    def attributes
-      self.class.attribute_names.each_with_object({}) do |name, hash|
-        hash[name] = send(name)
+      def inspect
+        "#<#{self.class.name} #{attributes.inspect}>"
       end
-    end
 
-    def ==(other)
-      to_hash == other.to_hash
-    end
+      def ==(other)
+        to_hash == other.to_hash
+      end
 
-    alias_method :to_hash, :attributes
+      def attributes
+        self.class.attribute_names.each_with_object({}) do |name, hash|
+          hash[name] = send(name)
+        end
+      end
+
+      alias_method :to_hash, :attributes
+
+      class_eval(&block) if block_given?
+    end
   end
 end
+
+require 'attrs/coercible'

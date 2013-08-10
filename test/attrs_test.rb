@@ -5,7 +5,7 @@ class Person < Attrs(:name, :age)
   private
 
   def age=(new_age)
-    super(new_age.to_f)
+    super(new_age.to_i)
   end
 end
 
@@ -19,6 +19,11 @@ class PersonTest < Minitest::Spec
 
   it "can be instantiated" do
     klass.new(valid_attributes).must_be_kind_of klass
+  end
+
+  it "has string representation" do
+    str = klass.new(valid_attributes).inspect
+    str.must_equal "#<#{klass} #{valid_attributes.inspect}>"
   end
 
   it "must be instantiated with all attributes" do
@@ -58,11 +63,11 @@ class PersonTest < Minitest::Spec
   end
 end
 
-# require 'attrs/coercible'
+require 'attrs/coercible'
 
-# class Person2 < Attrs(name: String, age: Integer)
-# end
+class Person2 < Attrs(name: String, age: Integer)
+end
 
-# class Person2Test < PersonTest
-#   let(:klass) { Person2 }
-# end
+class Person2Test < PersonTest
+  let(:klass) { Person2 }
+end
