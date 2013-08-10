@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Wojciech Mach"]
   spec.email         = ["wojtek@wojtekmach.pl"]
   spec.description   = "Yet another attributes on steroids gem"
-  spec.summary       = gem.description
+  spec.summary       = spec.description
   spec.homepage      = "https://github.com/wojtekmach/attrs"
   spec.license       = "MIT"
 
