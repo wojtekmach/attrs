@@ -5,18 +5,24 @@ Yet another attributes on steroids gem.
 Heavily inspired by [Virtus](https://github.com/solnic/virtus) and
 [Values](https://github.com/tcrayford/Values) which both are great projects.
 
+The purpose of this project is to have a small & simple codebase and minimum number of features.
+For a more complex solution I strongly recommend **Virtus** which I'm happily using in production.
+
 ## Features
 
 * immutability
 * all attributes must be specified on initialisation. Hopefully less `nil`'s flying around
 * uses `attr_reader` and `attr_writer`. Can be easily overwritten
-* just 50 LOC (not including coercion support)
+* just ~50 LOC (not including coercion support)
+* no external dependencies (again, not counting coercion which requires coercible gem)
 
 ## Usage
 
 Let's write a `Person` class:
 
 ```ruby
+require 'attrs'
+
 class Person < Attrs(:name, :age)
   private
 
@@ -43,7 +49,13 @@ Notice in previous example we added custom `age=` writer to coerce argument to i
 One of my favourite features of **Virtus** is attribute coercion, and you can use it here too.
 In fact it's using the same library that was extracted out from **Virtus**: <https://github.com/solnic/coercible>
 
+```
+gem install coercible
+```
+
 ```ruby
+require 'attrs/coercible'
+
 class Person < Attrs(name: String, age: Integer)
 end
 ```

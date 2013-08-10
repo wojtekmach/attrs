@@ -1,4 +1,9 @@
-require 'coercible'
+begin
+  require 'coercible'
+rescue LoadError => e
+  puts "Coercion support requires coercible: gem install coercible"
+  raise e
+end
 
 def Attrs(*attributes, &block)
   if attributes.size == 1 && attributes.first.is_a?(Hash)

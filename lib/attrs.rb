@@ -46,5 +46,3 @@ module Attrs
     end
   end
 end
-
-require 'attrs/coercible'
