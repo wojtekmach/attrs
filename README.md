@@ -2,7 +2,8 @@
 
 Yet another attributes on steroids gem.
 
-Heavily inspired by [Virtus](https://github.com/solnic/virtus) which totally rocks.
+Heavily inspired by [Virtus](https://github.com/solnic/virtus) and
+[Values](https://github.com/tcrayford/Values) which both are great projects.
 
 ## Features
 
