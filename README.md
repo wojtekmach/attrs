@@ -8,7 +8,7 @@ Heavily inspired by [Virtus](https://github.com/solnic/virtus) and
 ## Features
 
 * immutability
-* all attributes must be specified on initialisation. Hopefully less `nil`s flying around
+* all attributes must be specified on initialisation. Hopefully less `nil`'s flying around
 * uses `attr_reader` and `attr_writer`. Can be easily overwritten
 * just 50 LOC (not including coercion support)
 
