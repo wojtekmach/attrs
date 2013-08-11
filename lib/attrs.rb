@@ -18,7 +18,11 @@ module Attrs
         private :"#{name}="
       end
 
-      attribute_names.each { |name| attr name }
+      def self.attrs(*attribute_names)
+        attribute_names.each { |name| attr name }
+      end
+
+      attrs(*attribute_names)
 
       def initialize(attributes)
         self.class.attribute_names.each do |name|

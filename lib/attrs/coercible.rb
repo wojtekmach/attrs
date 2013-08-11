@@ -29,7 +29,11 @@ module CoercibleAttrs
         private :"#{name}="
       end
 
-      attributes.each { |name, type| attr(name, type) }
+      def self.attrs(attributes)
+        attributes.each { |name, type| attr(name, type) }
+      end
+
+      attrs(attributes)
 
       class_eval(&block) if block_given?
     end
