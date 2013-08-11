@@ -26,7 +26,7 @@ module Attrs
             if respond_to?("default_#{name}", true)
               send "default_#{name}"
             else
-              raise KeyError, "key not found: :age. Define :default_#{name} for a default value"
+              raise KeyError, "key not found: #{name.inspect}. Define :default_#{name} for a default value"
             end
           })
         end
